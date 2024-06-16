@@ -17,6 +17,7 @@ import com.dicoding.furniscan.databinding.FragmentHomeBinding
 import com.dicoding.furniscan.ui.HomeModelFactory
 import com.dicoding.furniscan.ui.detail.DetailActivity
 import com.dicoding.furniscan.Result
+import com.dicoding.furniscan.ui.category.CategoryFragment
 
 
 class HomeFragment : Fragment() {
@@ -49,9 +50,26 @@ class HomeFragment : Fragment() {
                 .commit()
         }
 
+
         binding.catChair.setOnClickListener {
-           val intent = Intent(context, DetailActivity::class.java)
-            startActivity(intent)
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.mainLayout, CategoryFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.catTable.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.mainLayout, CategoryFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.catSofa.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.mainLayout, CategoryFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         val factory: HomeModelFactory =
@@ -71,8 +89,6 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
         }
 
-
-
         adapterProduct.onClick = { product ->
             val intent = Intent(requireActivity(), DetailActivity::class.java)
             val outState = Bundle()
@@ -84,6 +100,7 @@ class HomeFragment : Fragment() {
             when (result) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
+
                 }
 
                 is Result.Success -> {
@@ -95,7 +112,10 @@ class HomeFragment : Fragment() {
 
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireActivity(), "Error: ${result.error}", Toast.LENGTH_SHORT).show()
+                    binding.rvFurniture.visibility = View.GONE
+                    binding.stateError.visibility = View.VISIBLE
+                    binding.stateTitle.visibility = View.VISIBLE
+                    binding.stateMessage.visibility = View.VISIBLE
                 }
 
                 else -> {}

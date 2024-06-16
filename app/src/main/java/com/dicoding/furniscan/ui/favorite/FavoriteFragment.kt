@@ -59,15 +59,16 @@ class FavoriteFragment : Fragment() {
             if (list != null){
                 adapter.submitList(list)
                 binding.rvFavorite.adapter = adapter
+                binding.rvFavorite.visibility = View.VISIBLE
+                binding.ivEmpty.visibility = View.GONE
+                binding.tvEmpty.visibility = View.GONE
                 println(list)
             }
 
             if (list.isEmpty()){
-                Toast.makeText(
-                    requireActivity(),
-                    "There are no favorite users",
-                    Toast.LENGTH_LONG
-                ).show()
+                binding.rvFavorite.visibility = View.GONE
+                binding.ivEmpty.visibility = View.VISIBLE
+                binding.tvEmpty.visibility = View.VISIBLE
             }
         }
     }

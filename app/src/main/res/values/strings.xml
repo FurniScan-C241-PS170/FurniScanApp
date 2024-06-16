@@ -48,4 +48,7 @@
     <string name="logout">logout</string>
     <string name="are_your_sure">Are You Sure</string>
     <string name="cancel">cancel</string>
+    <string name="stateError">Something went wrong,\n please try again</string>
+    <string name="stateErrorTitle">Oops!</string>
+    <string name="empty_favorite">Your Wishlist Is Empty</string>
 </resources>

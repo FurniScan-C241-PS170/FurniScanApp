@@ -15,7 +15,8 @@ import com.dicoding.furniscan.data.local.entity.FavoriteProduct
 import com.dicoding.furniscan.data.remote.DataProduct
 import com.dicoding.furniscan.databinding.ActivityDetailBinding
 import com.dicoding.furniscan.ui.FavoriteModelFactory
-import com.dicoding.furniscan.utils.formatRupiah
+import java.text.NumberFormat
+import java.util.Locale
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding : ActivityDetailBinding
@@ -42,7 +43,7 @@ class DetailActivity : AppCompatActivity() {
         if (intent.hasExtra("selected_product")){
             selectedProduct = intent?.getSerializableExtra("selected_product") as DataProduct
             binding.tvTitle.text = selectedProduct?.productName
-            val formattedPrice = formatRupiah(selectedProduct?.price!!.toDouble())
+            val formattedPrice = formatPrice(selectedProduct?.price!!.toDouble())
             binding.tvRating.text = selectedProduct.rating!!.toString()
             binding.tvPrice.text = formattedPrice
             Glide.with(this@DetailActivity)
@@ -71,8 +72,7 @@ class DetailActivity : AppCompatActivity() {
         favoriteProduct.productImage = selectedProduct.productImage?.get(0)
 
         if (intent.hasExtra(EXTRA_DATA)) {
-            val productId = intent.getStringExtra(EXTRA_DATA)
-            Toast.makeText(this, "Product ID: $productId", Toast.LENGTH_SHORT).show()
+            val productId = intent.getIntExtra(EXTRA_DATA, 0)
             if (productId != null) {
                 viewModel.getDetailProduct(productId.toInt()).observe(this) {result ->
                     when (result) {
@@ -84,19 +84,13 @@ class DetailActivity : AppCompatActivity() {
                             binding.progressBar.visibility = View.GONE
                             val item = result.data
                             binding.tvTitle.text = item.productName
-                            val formattedPrice = formatRupiah(item.price!!.toDouble())
+                            val formattedPrice = formatPrice(item.price!!.toDouble())
                             binding.tvPrice.text = formattedPrice
                             binding.tvContentItem.text = item.description
                             binding.tvRating.text = item.rating!!.toString()
                             Glide.with(this@DetailActivity)
                                 .load(item.productImage!![0])
                                 .into(binding.ivItem)
-                            Toast.makeText(
-                                this,
-                                "Success: ${item.productImage!![0]}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
                             val expandableText = """
                             Material        : ${item.material}
                             Fabric           : ${item.fabric}
@@ -104,7 +98,33 @@ class DetailActivity : AppCompatActivity() {
                         """.trimIndent()
                             binding.tvExpandableItem.text = expandableText
 
-                            println(item)
+                            viewModel.getFavoriteProductById(item.productId).observe(this) {
+                                if (it != null) {
+                                    binding.ivFavorite.setImageResource(R.drawable.ic_fav)
+                                    favorite = true
+                                } else {
+                                    binding.ivFavorite.setImageResource(R.drawable.ic_unfav)
+                                    favorite = false
+                                }
+                            }
+
+                            favoriteProduct.productId = item.productId
+                            favoriteProduct.id = item.productId
+                            favoriteProduct.productName = item.productName
+                            favoriteProduct.productPrice = item.price
+                            favoriteProduct.productImage = item.productImage?.get(0)
+
+//                            binding.ivFavorite.setOnClickListener {
+//                                if (favorite) {
+//                                    viewModel.delete(favoriteProduct)
+//                                    binding.ivFavorite.setImageResource(R.drawable.ic_unfav)
+//                                    favorite = false
+//                                } else {
+//                                    viewModel.insert(favoriteProduct)
+//                                    binding.ivFavorite.setImageResource(R.drawable.ic_fav)
+//                                    favorite = true
+//                                }
+//                            }
                         }
 
                         is Result.Error -> {
@@ -150,6 +170,11 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
+    fun formatPrice(price: Double): String {
+        val localeID = Locale("in", "ID")
+        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+        return numberFormat.format(price)
+    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

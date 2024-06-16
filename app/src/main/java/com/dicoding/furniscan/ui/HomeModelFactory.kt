@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.furniscan.di.Injection
 import com.dicoding.furniscan.repository.ProductRepository
+import com.dicoding.furniscan.ui.category.CategoryViewModel
 import com.dicoding.furniscan.ui.home.HomeViewModel
 
 class HomeModelFactory(private val repository: ProductRepository) : ViewModelProvider.Factory {
@@ -13,6 +14,10 @@ class HomeModelFactory(private val repository: ProductRepository) : ViewModelPro
         when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 return HomeViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(CategoryViewModel::class.java) -> {
+                return CategoryViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

@@ -15,7 +15,7 @@ tools:context=".ui.home.HomeFragment">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
     android:layout_marginVertical="20dp">
 
@@ -37,7 +37,7 @@ tools:context=".ui.home.HomeFragment">
         android:id="@+id/profile"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:src="@drawable/tes"
+        android:src="@drawable/ic_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/corner"
@@ -98,22 +98,27 @@ tools:context=".ui.home.HomeFragment">
 
             <ImageButton
                 android:id="@+id/cat_chair"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="125dp"
+                android:layout_height="56dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/chair_cat"
                 android:background="@drawable/transparent_button"
                 android:layout_marginHorizontal="15dp"/>
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/cat_table"
+                android:layout_width="125dp"
+                android:layout_height="56dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/desk_cat"
                 android:background="@drawable/transparent_button"
                 android:layout_marginHorizontal="15dp"/>
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/cat_sofa"
+                android:layout_width="125dp"
+                android:layout_height="56dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/sofa_cat"
                 android:background="@drawable/transparent_button"
                 android:layout_marginHorizontal="15dp"/>
@@ -159,6 +164,44 @@ tools:context=".ui.home.HomeFragment">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/items" />
+
+
+    <ImageView
+        android:id="@+id/stateError"
+        android:layout_width="225dp"
+        android:layout_height="205dp"
+        android:src="@drawable/ic_state_error"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/items"
+        app:layout_constraintVertical_bias="0.227" />
+
+    <TextView
+        android:id="@+id/stateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stateErrorTitle"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginTop="-18dp"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stateError" />
+
+    <TextView
+        android:id="@+id/stateMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stateError"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stateTitle" />
 
     <ProgressBar
         android:id="@+id/progressBar"

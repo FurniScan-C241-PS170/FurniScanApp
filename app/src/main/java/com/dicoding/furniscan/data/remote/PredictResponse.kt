@@ -1,60 +1,54 @@
 package com.dicoding.furniscan.data.remote
 
-import android.os.Parcelable
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
-import java.io.Serializable
 
-@Parcelize
-data class ProductResponse(
+data class PredictResponse(
 
 	@field:SerializedName("data")
-	val data: List<DataProduct>,
+	val data: DataPredict,
 
 	@field:SerializedName("message")
 	val message: String,
 
 	@field:SerializedName("status")
 	val status: Int
-) : Parcelable, Serializable
+)
 
-@Parcelize
-data class DataProduct(
+data class DataPredict(
 
 	@field:SerializedName("color")
-	val color: List<String>? = null,
+	val color: List<String>,
 
 	@field:SerializedName("material")
-	val material: String? = null,
+	val material: String,
 
 	@field:SerializedName("category_id")
-	val categoryId: Int? = null,
+	val categoryId: Int,
 
 	@field:SerializedName("product_image")
-	val productImage: List<String>? = null,
+	val productImage: List<String>,
 
 	@field:SerializedName("price")
-	val price: Int? = null,
+	val price: Int,
 
 	@field:SerializedName("fabric")
-	val fabric: String? = null,
+	val fabric: String,
 
 	@field:SerializedName("product_id")
-	val productId: Int = 0,
+	val productId: Int,
 
 	@field:SerializedName("rating")
-	val rating: Float? = null,
+	val rating: Float,
 
 	@field:SerializedName("description")
-	val description: String? = null,
+	val description: String,
 
 	@field:SerializedName("stock_quantity")
-	val stockQuantity: Int? = null,
+	val stockQuantity: Int,
 
 	@field:SerializedName("product_name")
-	val productName: String? = null,
+	val productName: String,
 
 	@field:SerializedName("dimension")
-	val dimension: String? = null
-) : Parcelable, Serializable
+	val dimension: String
+)

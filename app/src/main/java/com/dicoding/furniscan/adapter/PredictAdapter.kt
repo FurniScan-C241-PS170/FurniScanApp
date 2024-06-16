@@ -6,14 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dicoding.furniscan.R
-import com.dicoding.furniscan.data.remote.DataProduct
+import com.dicoding.furniscan.data.remote.DataPredict
 import com.dicoding.furniscan.databinding.ItemCardBinding
-import java.text.NumberFormat
-import java.util.Locale
+import com.dicoding.furniscan.utils.formatRupiah
 
-class ProductAdapter : ListAdapter<DataProduct, ProductAdapter.MyViewHolder>(DIFF_CALLBACK) {
-    var onClick: ((DataProduct) -> Unit)? = null
+class PredictAdapter : ListAdapter<DataPredict, PredictAdapter.MyViewHolder>(DIFF_CALLBACK) {
+    var onClick: ((DataPredict) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -28,10 +26,10 @@ class ProductAdapter : ListAdapter<DataProduct, ProductAdapter.MyViewHolder>(DIF
     class MyViewHolder(private val binding: ItemCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(currentItem: DataProduct, onClick: ((DataProduct) -> Unit)?) {
+        fun bind(currentItem: DataPredict, onClick: ((DataPredict) -> Unit)?) {
             binding.title.text = currentItem.productName
             binding.description.text = currentItem.price.toString()
-            val formattedPrice = formatPrice(currentItem.price!!.toDouble())
+            val formattedPrice = formatRupiah(currentItem.price!!.toDouble())
             binding.description.text = formattedPrice
 
             binding.root.setOnClickListener {
@@ -39,29 +37,21 @@ class ProductAdapter : ListAdapter<DataProduct, ProductAdapter.MyViewHolder>(DIF
             }
 
             Glide.with(binding.root)
-                .load(currentItem.productImage?.get(0))
+                .load(currentItem.productImage)
 //                .error(R.drawable.login_pic)
                 .into(binding.imageView)
         }
-
-        fun formatPrice(price: Double): String {
-            val localeID = Locale("in", "ID")
-            val numberFormat = NumberFormat.getCurrencyInstance(localeID)
-            return numberFormat.format(price)
-        }
     }
 
-
-
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataProduct>() {
-            override fun areItemsTheSame(oldItem: DataProduct, newItem: DataProduct): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataPredict>() {
+            override fun areItemsTheSame(oldItem: DataPredict, newItem: DataPredict): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: DataProduct,
-                newItem: DataProduct
+                oldItem: DataPredict,
+                newItem: DataPredict
             ): Boolean {
                 return oldItem == newItem
             }
