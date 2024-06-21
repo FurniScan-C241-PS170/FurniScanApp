@@ -1,12 +1,14 @@
 # FurniScan Mobile App
 
-**Introduction**
+
+
+## Introduction
 Welcome to FurniScan, the mobile application that allows you to scan furniture and display detailed product information. This readme provides an overview of the FurniScan mobile app, its features, and the technologies used in its development.
 
-**About the Project**
+## About the Project
 The FurniScan mobile app follows the MVVM (Model-View-ViewModel) architecture pattern. In this pattern, the user interface components, like activities and fragments, observe real-time data updates from the view model. The view model retrieves the observed data from the data source layer, which consists of the model and repository. The data source layer serves as a connection between the API responses and the presentation layer (view and view model), enabling smooth data access for users.
 
-**Mobile Tech Stack**
+## Mobile Tech Stack
 The FurniScan mobile app is built using the following technologies:
 
 - **Android Studio**: The official IDE for Android app development.
@@ -23,7 +25,7 @@ The FurniScan mobile app is built using the following technologies:
 - **Glide**: A powerful image loading and caching library for displaying furniture images in the app.
 
 
-**Project Installation Guide**
+## Project Installation Guide
 To install and run the FurniScan mobile app on your local machine, follow the steps below:
 
 1. Clone the project repository from GitHub:
