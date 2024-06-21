@@ -43,3 +43,8 @@ To design the user interface, use Figma, here is the link:
 
 For more detailed instructions and troubleshooting tips, please consult the project's GitHub repository:
 [GitHub Repository](https://github.com/FurniScan-C241-PS170/FurniScanApp)
+
+
+<img
+src="https://github.com/FurniScan-C241-PS170/FurniScanApp/blob/master/FurniScan.png"
+alt="ui kit">
