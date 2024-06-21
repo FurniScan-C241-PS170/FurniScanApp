@@ -1,6 +1,8 @@
 # FurniScan Mobile App
 
-
+<img
+src="https://github.com/FurniScan-C241-PS170/FurniScanApp/blob/master/splashscreen.png"
+alt="logo application">
 
 ## Introduction
 Welcome to FurniScan, the mobile application that allows you to scan furniture and display detailed product information. This readme provides an overview of the FurniScan mobile app, its features, and the technologies used in its development.
